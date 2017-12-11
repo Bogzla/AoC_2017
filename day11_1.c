@@ -75,5 +75,5 @@ int main(void)
         stps = x + ((y-x)/2);
     }
     printf("Num steps: %i\n",stps);
-
+    free(s)
 }
