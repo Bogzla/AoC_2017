@@ -78,4 +78,5 @@ int main(void)
         }
     }
     printf("Max steps: %i\n",stpst);
+    free(s);
 }
