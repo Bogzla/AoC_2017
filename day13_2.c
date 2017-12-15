@@ -5,7 +5,8 @@
 // for part 2, added complexity of time offset. Add delay to the layer number and check:
 // (layer + delay) mod ((range*2)-2) == 0
 // There is a trick that simply looking for 0 severity *is not* the same as avoiding detection as
-// getting caught at layer 0 contributes 0 to severity score
+// getting caught at layer 0 contributes 0 to severity score.
+// Code optimised by realisation that calculating severity pointless once you've encountered one scanner.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -66,14 +67,16 @@ int main(void)
         {
             if ((vals[i][0] + dly) % ((vals[i][1] * 2)-2) == 0)
             {
-                if (vals[i][0] == 0)
+                svrty = 1; //we've encountered a scanner, no point calculating full severity. just quit.
+                break;
+            /*    if (vals[i][0] == 0)
                 {
                     svrty += 1; // to avoid trap of getting caught in layer 0 contributing 0 to severity
                 }
-                svrty += (vals[i][0]*vals[i][1]);
+                svrty += (vals[i][0]*vals[i][1]); */
             }
         }
-        if (svrty == 0)
+        if (svrty == 0) // no scanners encountered. Print result.
         {
             printf("%i\n", dly);
         }
